@@ -14,24 +14,16 @@
         <q-toolbar-title>
           <q-avatar>
             <img src="~/assets/bolt.svg" />
-          </q-avatar>
-
-          Pickup Store
+          </q-avatar>Pickup Store
         </q-toolbar-title>
-
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-2"
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="bg-grey-2">
       <q-list>
         <q-item-label header>Menu</q-item-label>
 
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
+        <q-item clickable tag="a" to="/home">
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
@@ -40,12 +32,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item
-          clickable
-          tag="a"
-          target="_blank"
-          href="https://github.quasar.dev"
-        >
+        <q-item clickable tag="a" to="/cars">
           <q-item-section avatar>
             <q-icon name="directions_car" />
           </q-item-section>
@@ -54,12 +41,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item
-          clickable
-          tag="a"
-          target="_blank"
-          href="https://chat.quasar.dev"
-        >
+        <q-item clickable tag="a">
           <q-item-section avatar>
             <q-icon name="map" />
           </q-item-section>
@@ -67,7 +49,6 @@
             <q-item-label>Tracks</q-item-label>
           </q-item-section>
         </q-item>
-
       </q-list>
     </q-drawer>
 
@@ -90,9 +71,7 @@ export default {
 </script>
 
 <style>
-
 .bg-toolbar {
   background: #4b4b4b;
 }
-
 </style>
