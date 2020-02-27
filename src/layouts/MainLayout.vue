@@ -16,6 +16,9 @@
             <img src="~/assets/bolt.svg" />
           </q-avatar>Pickup Store
         </q-toolbar-title>
+
+        <q-btn flat dense icon="person" @click.prevent="login" v-if="!activeUser" label="Login"/>
+        <q-btn flat dense icon="person" @click.prevent="logout" v-else label="Logout"/>
       </q-toolbar>
     </q-header>
 
@@ -64,7 +67,25 @@ export default {
 
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+      activeUser: null
+    }
+  },
+  watch: {
+    // everytime a route is changed refresh the activeUser
+    '$route': 'refreshActiveUser'
+  },
+  methods: {
+    login () {
+      this.$auth.loginRedirect()
+    },
+    async refreshActiveUser () {
+      this.activeUser = await this.$auth.getUser()
+    },
+    async logout () {
+      await this.$auth.logout()
+      await this.refreshActiveUser()
+      this.$router.push('/')
     }
   }
 }

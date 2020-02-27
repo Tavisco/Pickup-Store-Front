@@ -1,3 +1,4 @@
+import Auth from '@okta/okta-vue'
 
 const routes = [
   {
@@ -5,8 +6,10 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', redirect: 'home' },
+      { path: '/implicit/callback', component: Auth.handleCallback() },
       { path: 'home', component: () => import('pages/Home.vue') },
       { path: 'cars', component: () => import('pages/Cars.vue') }
+      // { path: 'cars', component: () => import('pages/Cars.vue'), meta: { requiresAuth: true } }
     ]
   }
 ]
