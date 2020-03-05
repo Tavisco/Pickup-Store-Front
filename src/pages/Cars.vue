@@ -3,7 +3,7 @@
     <!-- content -->
     <h3 class="text-weight-light">Cars</h3>
 
-    <div class="q-pa-md q-gutter-y-md column items-start">
+    <div v-if="activeUser" class="q-pa-md q-gutter-y-md column items-start">
       <q-btn-group outline>
         <q-btn outline color="primary" label="Publish new car" icon="library_add" />
         <q-btn outline color="secondary" label="Manage" icon="library_books" />
@@ -84,7 +84,14 @@
 
 <script>
 export default {
-  // name: 'PageName',
+  name: 'Cars',
+  computed: {
+    activeUser: {
+      get () {
+        return this.$store.state.store.activeUser
+      }
+    }
+  },
   data () {
     return {
       latestCars: [

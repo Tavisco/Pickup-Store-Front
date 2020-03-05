@@ -65,11 +65,23 @@
 export default {
   name: 'MainLayout',
 
+  computed: {
+    activeUser: {
+      get () {
+        return this.$store.state.store.activeUser
+      },
+      set (val) {
+        this.$store.commit('store/updateActiveUser', val)
+      }
+    }
+  },
   data () {
     return {
-      leftDrawerOpen: false,
-      activeUser: null
+      leftDrawerOpen: false
     }
+  },
+  async created () {
+    await this.refreshActiveUser()
   },
   watch: {
     // everytime a route is changed refresh the activeUser
