@@ -5,7 +5,7 @@
 
     <div v-if="activeUser" class="q-pa-md q-gutter-y-md column items-start">
       <q-btn-group outline>
-        <q-btn outline color="primary" label="Publish new car" icon="library_add" />
+        <q-btn outline color="primary" label="Publish new car" icon="library_add" to="cars/new"/>
         <q-btn outline color="secondary" label="Manage" icon="library_books" />
       </q-btn-group>
     </div>

@@ -1,6 +1,6 @@
 {
   "name": "pickup",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "Store for Re-Volt assets",
   "productName": "Pickup Store",
   "cordovaId": "org.cordova.quasar.app",
@@ -16,10 +16,10 @@
   "dependencies": {
     "@okta/okta-vue": "^1.3.0",
     "@quasar/extras": "^1.5.2",
-    "quasar": "^1.9.4"
+    "quasar": "^1.9.8"
   },
   "devDependencies": {
-    "@quasar/app": "^1.5.8",
+    "@quasar/app": "^1.6.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",

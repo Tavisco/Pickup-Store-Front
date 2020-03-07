@@ -8,8 +8,8 @@ const routes = [
       { path: '', redirect: 'home' },
       { path: '/implicit/callback', component: Auth.handleCallback() },
       { path: 'home', component: () => import('pages/Home.vue') },
-      { path: 'cars', component: () => import('pages/Cars.vue') }
-      // { path: 'cars', component: () => import('pages/Cars.vue'), meta: { requiresAuth: true } }
+      { path: 'cars', component: () => import('pages/Cars.vue') },
+      { path: 'cars/new', component: () => import('pages/cars/NewCar.vue'), meta: { requiresAuth: true } }
     ]
   }
 ]
