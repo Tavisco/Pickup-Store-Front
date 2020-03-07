@@ -76,7 +76,12 @@
 
             <q-card-actions align="right">
               <q-btn flat label="Reset" type="reset" color="primary" class="q-ml-sm" />
-              <q-btn label="Submit" type="submit" color="primary"/>
+              <q-btn :loading="uploading" label="Submit" type="submit" color="primary" style="width: 150px">
+                <template v-slot:loading>
+                  <q-spinner-hourglass class="on-left" />
+                  Uploading...
+                </template>
+              </q-btn>
             </q-card-actions>
           </q-form>
         </q-card-section>
@@ -93,7 +98,8 @@ export default {
       name: null,
       description: null,
       authors: [],
-      file: null
+      file: null,
+      uploading: false
     }
   },
   created () {
@@ -105,21 +111,14 @@ export default {
   },
   methods: {
     onSubmit () {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to accept the license and terms first'
-        })
-      } else {
-        this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Submitted'
-        })
-      }
+      this.uploading = true
+
+      // this.$q.notify({
+      //   color: 'green-4',
+      //   textColor: 'white',
+      //   icon: 'cloud_done',
+      //   message: 'Submitted'
+      // })
     },
 
     onReset () {
