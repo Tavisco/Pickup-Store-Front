@@ -91,6 +91,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   // name: 'PageName',
   data () {
@@ -110,7 +112,7 @@ export default {
     ]
   },
   methods: {
-    onSubmit () {
+    async onSubmit () {
       this.uploading = true
 
       // this.$q.notify({
@@ -119,6 +121,36 @@ export default {
       //   icon: 'cloud_done',
       //   message: 'Submitted'
       // })
+      /*
+          Initialize the form data
+      */
+      let formData = new FormData()
+
+      /*
+          Add the form data we need to submit
+      */
+      formData.append('file', this.file)
+      formData.append('name', this.name)
+      formData.append('description', this.description)
+      formData.append('authors', this.authors)
+
+      /*
+        Make the request to the POST /single-file URL
+      */
+      let accessToken = await this.$auth.getAccessToken()
+
+      axios.post(process.env.CARS_API + '/cars',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${accessToken}`
+          }
+        }).then(function () {
+        console.log('SUCCESS!!')
+      }).catch(function () {
+        console.log('FAILURE!!')
+      })
     },
 
     onReset () {
