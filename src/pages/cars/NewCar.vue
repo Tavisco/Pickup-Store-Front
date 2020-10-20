@@ -4,19 +4,19 @@
     <!-- content -->
     <div class="row justify-center">
 
-      <q-banner
-        inline-actions
-        rounded
-        class="warn-banner text-white bg-red"
-        v-if="error"
-      >
-        <strong>Oops! Something went wrong!</strong> {{this.error}}
-        <template v-slot:action>
-          <q-btn flat color="white" label="Dismiss" @click="error = ''"/>
-        </template>
-      </q-banner>
+      <div class="column col-md-6">
+        <q-banner
+          inline-actions
+          rounded
+          class="warn-banner text-white bg-red"
+          v-if="error"
+        >
+          <strong>Oops! Something went wrong!</strong> {{this.error}}
+          <template v-slot:action>
+            <q-btn flat color="white" label="Dismiss" @click="error = ''"/>
+          </template>
+        </q-banner>
 
-      <div class="col-md-6">
         <q-stepper
           v-model="step"
           ref="stepper"
@@ -119,7 +119,6 @@
           </template>
         </q-stepper>
       </div>
-
     </div>
   </q-page>
 </template>
@@ -138,13 +137,14 @@ export default {
       uploading: false,
       step: 1,
       error: '',
-      errorVisible: false
+      errorVisible: false,
+      response: ''
     }
   },
   created () {
     this.authors = [
       {
-        name: this.$store.state.store.activeUser.given_name
+        name: this.$store.state.store.activeUser.nickname
       }
     ]
   },
@@ -159,13 +159,20 @@ export default {
       let accessToken = await this.$auth.getAccessToken()
 
       axios.post(process.env.CARS_API + '/cars',
-        this.uploading,
+        {
+          name: this.name,
+          description: this.description,
+          authors: this.authors
+        },
         {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
         })
-        .then(response => { this.$refs.stepper.next() })
+        .then(response => {
+          this.$refs.stepper.next()
+          this.response = response // Obter ID da response para o proximo step
+        })
         .catch(error => this.handleError(error))
     },
 
